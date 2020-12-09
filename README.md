@@ -3,7 +3,7 @@
 ## Welcome to Nastazja's repository for the 5995 assignment 2 independent project. 
 
 **Nastazja had no coding experience prior to this course. Skills for these assignments were learnt from a 1-week intensive course, several readings of learning 
-materials and a few run-throughs of the practicals. This repository contains a project build-up chosen from the list of suggested ideas, it is 'Planning for drunks'.
+materials and a few run-throughs of the practicals. This repository contains a project build-up chosen from the list of suggested ideas, it is 'Planning for drunks'.**
 
 ## Description
 
@@ -21,10 +21,9 @@ environment, provided as drunk.plan.txt, and they can only enter their own home 
 
 ## Details 
 
-The model is composed of the core script in drunks_model.py and the drunks_framework.py containing the Class for the drunks. The environment is read in from 
-drunk.plan.txt where the pub is denoted by 1s, the houses by numbers 10-250 and empty space by 0s. A density map of drunks passing through each point is outputted
-as density_map.txt. A UML is also found in this repository showing the code structure. summary.txt details the intention of the software, issues during development
-and how these were overcome, general sources used, the thought processes going into the software design, and the software development process followed. 
+The model is composed of the core script in *drunks_model.py* and the *drunks_framework.py* containing the Class for the drunks. The environment is read in from 
+*drunk.plan.txt* where the pub is denoted by 1s, the houses by numbers 10-250 and empty space by 0s. A density map of drunks passing through each point is created 
+as an **output** called *density_map.txt*. A UML is also found in this repository showing the code structure. summary.txt details the intention of the software, issues during development and how these were overcome, general sources used, the thought processes going into the software design, and the software development process followed. 
 
 ## License 
 
