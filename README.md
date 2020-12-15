@@ -25,7 +25,7 @@ The model is composed of the core script in *drunks_model.py* and the *drunks_fr
 *drunk.plan.txt* where the pub is denoted by 1s, the houses by numbers 10-250 and empty space by 0s. A density map of drunks passing through each point is created 
 as an **output** called *density_map.txt*. A UML is also found in this repository showing the code structure. summary.txt details the intention of the software,
 issues during development and how these were overcome, general sources used, the thought processes going into the software design, and the software development
-process followed. The project was written using Python script in the Spyder environment downloaded from Anaconda Navigator.
+process followed. The project was written using Python 3.8 script in the Spyder environment downloaded from Anaconda Navigator.
 
 ## Usage 
 
