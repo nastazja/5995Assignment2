@@ -8,8 +8,8 @@ materials and a few run-throughs of the practicals. This repository contains a p
 ## Description
 
 There is a group of 25 drunks at an initial set of coordinates which represent the pub. At the pub, the drunks are told their home number. The drunks leave 
-the pub, wandering around town until they stumble upon their own home. They move freely within the boundaries of the town, provided as drunk.plan.txt, and they can
-only exit the town environment by entering their own home. 
+the pub, wandering around town until they stumble upon their homes. They move freely within the boundaries of the town, provided as drunk.plan.txt, and they can
+only exit the town environment by entering their home. 
 
 ## Assignment criteria
 
