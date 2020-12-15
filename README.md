@@ -27,6 +27,11 @@ as an **output** called *density_map.txt*. A UML is also found in this repositor
 issues during development and how these were overcome, general sources used, the thought processes going into the software design, and the software development
 process followed. The project was written using Python script in the Spyder environment downloaded from Anaconda Navigator.
 
+## Usage 
+
+The user will need to download relevant files from my repository, the model can be modified to include my code for it to run from command line/terminal with two
+system arguments: for number of drunks and number of iterations eg. 'drunks_model.py 25 1000'.
+
 ## License 
 
 MIT license, details in LICENSE.md
