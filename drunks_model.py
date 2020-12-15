@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt # for plotting figures
 import drunks_framework # for the Drunk class 
 import pandas # for exploring the dataframe
 import tkinter # builds GUI
-from time import perf_counter # to time the code
+#from time import perf_counter # to time the code
 
 
 '''
@@ -35,9 +35,9 @@ The following programme defines the parameters within the code:
     
 '''
 
-# Start timing the code
+# Start timing the code (uncomment here and at end of programme)
 
-start = perf_counter()
+#start = perf_counter()
 
 # List all variables that can be altered within the code at the top
 
@@ -245,6 +245,7 @@ map text file with the data of where the drunks stepped to get there.
 
 
 
+
 for i in range(num_of_drunks):
     while (town[drunks[i].y][drunks[i].x] != drunks[i].home_num):
         drunks[i].move()
@@ -269,13 +270,15 @@ with open('densitymap.txt', 'w', newline='') as f3:
     # write all the density data stored through the Drunk class and densitymap 
     # list when drunks move
     for row in densitymap: 
-        csvwriter.writerow(row)        
+        csvwriter.writerow(row) 
+
+
+# Finish timing the code (uncomment)
+
+#end = perf_counter()
+#print("time = " + str(end - start)) 
 '''
-
-# Finish timing the code
-
-end = perf_counter()
-print("time = " + str(end - start))        
+       
 
 """
 End of the 'Planning for drunks' model for GEOG5995 Assignment 2

@@ -15,24 +15,19 @@ import random
 # Define the Drunk class and its attributes, so that it becomes possible to 
 # create functions for the drunks behaviours (move and density).
 
-
-'''
-The parent class used to represent a Drunk.
-
-...
-    
-Attributes are described in the constructor method.
-
-Methods
--------
-1. constructor
-2. move
-3. density
-   
-Methods are defined within themselves.
-'''
-
 class Drunk:
+    '''
+    The parent class used to represent a Drunk
+    ...
+    Attributes are described in the constructor method.
+    Methods
+    -------
+    1. constructor
+    2. move
+    3. density
+    Methods are defined within themselves.
+    '''
+
     def __init__(self, densitymap, drunks, home_num, startx, starty):
         '''
          Parameters
