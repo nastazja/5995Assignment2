@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Dec  9 17:06:52 2020
+This file contains the main model for GEOG5995 Assignment 2
+
+Planning for drunks
 
 @author: nastazjalaskowski
 """
@@ -10,10 +12,13 @@ Created on Wed Dec  9 17:06:52 2020
 
 import csv # for reading and writing files
 import matplotlib
+matplotlib.use('TkAgg') # allows selection of backend needed for graphics to work
 import matplotlib.animation # for making animations
 import matplotlib.pyplot as plt # for plotting figures
 import drunks_framework # for the Drunk class 
 import pandas # for exploring the dataframe
+import tkinter # builds GUI
+from time import perf_counter # to time the code
 
 
 '''
@@ -29,6 +34,10 @@ within the code:
 The following programme defines the parameters within the code:
     
 '''
+
+# Start timing the code
+
+start = perf_counter()
 
 # List all variables that can be altered within the code at the top
 
@@ -110,12 +119,15 @@ print('pub located') # to verify this step was carried out
 
 # ESTABLISH START COORDINATES
 
-# enumerate provides another way to search rows and values for 1s (taken from docs.python.org)
+# enumerate provides another way to search rows and values for 1s 
+# (taken from docs.python.org)
 
 for y, row in enumerate(town):
     for x, num in enumerate(row):
+        # makes sure the drunks start with x and y coordinates at the pub 
+        # by inserting startx and starty into Drunk class
         if num == 1:
-            startx = x # makes sure the drunks start with x and y coordinates at the pub by inserting into Drunk class
+            startx = x 
             starty = y
 
 print('starting point set') # to verify this step was carried out
@@ -124,13 +136,17 @@ print('starting point set') # to verify this step was carried out
 # CREATE THE DRUNKS
 
 for i in range(num_of_drunks):
-    home_num = ((i+1)*10) # assign home number, i+1 because i in range(num_of_drunks) is 0 to 24, house numbers are 10 to 250
-    drunks.append(drunks_framework.Drunk(densitymap, drunks, home_num, startx, starty)) # uses Drunk class from drunks_framework
+    # assign home number, use i+1 because i in range(num_of_drunks) is 0 to 24 
+    # and house numbers are 10 to 250
+    home_num = ((i+1)*10) 
+    # use Drunk class from drunks_framework to add drunks into drunks list
+    drunks.append(drunks_framework.Drunk(densitymap, drunks, home_num, startx, starty))
+    
     
 print('agents created') # to verify this step was carried out 
 
 
-# CREATE ANIMATION OF DRUNKS WANDERING AROUND
+# CREATE ANIMATION AND GUI OF DRUNKS WANDERING AROUND
 
 # Determine variables 
 
@@ -171,7 +187,8 @@ def update(misc): # to keep animation going
         
     plt.xlim(0, 300) # set axes
     plt.ylim(0, 300)
-    plt.title('Drunks Wandering') # clarifies what the figure is showing once drunks are overlayed
+    # clarify what the figure is showing once drunks are overlayed using title
+    plt.title('Drunks Wandering') 
     plt.imshow(town)
     plt.scatter(pubrow, pubcolumn)
     
@@ -185,15 +202,47 @@ def gen(b = [0]): # supplies data to the update function for each frame of the a
     while (a < 10000000000) & (carry_on) :
            yield a
            a = a + 1
-           
-animation = matplotlib.animation.FuncAnimation(fig, update, interval=10, frames=gen)
-plt.show() # displays the animation
+
+# Uncomment the code directly below if you want animation without GUI and comment
+# out GUI code:     
+# animation = matplotlib.animation.FuncAnimation(fig, update, interval=10, frames=gen)
+# plt.show() 
+
+# MAKING A GUI (code taken from the lectures, creates a pop-up. Sometimes glitchy 
+# and creates two pop ups, please remember to press 'Run Model' in the menu). 
+      
+def run(): # will initiate the animation when Menu -> Run model is clicked.
+    animation = matplotlib.animation.FuncAnimation(fig, update, interval=10, frames=gen, repeat=False)
+    canvas.draw()
+
+# Build the layers and labels of the GUI and link it to the run method.
+
+root = tkinter.Tk()   
+root.wm_title("Model") # title of the GUI pop-up
+canvas = matplotlib.backends.backend_tkagg.FigureCanvasTkAgg(fig, master=root)
+canvas._tkcanvas.pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+menu_bar = tkinter.Menu(root)
+root.config(menu=menu_bar)
+model_menu = tkinter.Menu(menu_bar)
+menu_bar.add_cascade(label="Model", menu=model_menu) # click on menu
+model_menu.add_command(label="Run model", command=run) # then click on Run model
+tkinter.mainloop()
+
+# SAVE DENSITY MAP AS TEXT FILE
+
+with open('densitymap.txt', 'w', newline='') as f3:
+    csvwriter = csv.writer(f3, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
+    # write all the density data stored through the Drunk class and densitymap 
+    # list when drunks move
+    for row in densitymap: 
+        csvwriter.writerow(row)
+        
 
 '''
+Alternatively, comment out all the code relevant to the animation & GUI, insert 
+the code below for a figure of all drunks at their homes and to supply the density 
+map text file with the data of where the drunks stepped to get there.
 
-Alternatively, comment out all the code relevant to the animation, insert this code for
-a figure of all drunks at their homes and to supply the density map with where the drunks 
-stepped to get there.
 
 
 for i in range(num_of_drunks):
@@ -212,20 +261,22 @@ plt.scatter(pubrow, pubcolumn)
     
 for i in range(len(drunks)):
     plt.scatter(drunks[i].x, drunks[i].y, s=40, c='red', label = 'drunk')
-'''           
-
+    
 # SAVE DENSITY MAP AS TEXT FILE
 
 with open('densitymap.txt', 'w', newline='') as f3:
     csvwriter = csv.writer(f3, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
-    for row in densitymap: # writes all the density data stored through the Drunk class and densitymap list when drunks moved
-        csvwriter.writerow(row)
-        
-print("Density file written") # to verify this step was carried out
+    # write all the density data stored through the Drunk class and densitymap 
+    # list when drunks move
+    for row in densitymap: 
+        csvwriter.writerow(row)        
+'''
 
+# Finish timing the code
 
+end = perf_counter()
+print("time = " + str(end - start))        
 
-    
-        
-
-
+"""
+End of the 'Planning for drunks' model for GEOG5995 Assignment 2
+"""

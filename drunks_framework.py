@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Dec 14 15:58:34 2020
+This file defines the class Drunk for the GEOG5995 Assignment 2
+
+Planning for drunks
 
 @author: nastazjalaskowski
 """
@@ -10,24 +12,60 @@ Created on Mon Dec 14 15:58:34 2020
 
 import random
 
-# Define the Drunk class and its attributes, so that it becomes possible to create
-# functions for the drunks behaviours (move and add density)
+# Define the Drunk class and its attributes, so that it becomes possible to 
+# create functions for the drunks behaviours (move and density).
+
+
+'''
+The parent class used to represent a Drunk.
+
+...
+    
+Attributes are described in the constructor method.
+
+Methods
+-------
+1. constructor
+2. move
+3. density
+   
+Methods are defined within themselves.
+'''
 
 class Drunk:
-    # __init__ is the constructor 
     def __init__(self, densitymap, drunks, home_num, startx, starty):
+        '''
+         Parameters
+         ----------
+         densitymap : list
+             The list for recording density data about where drunks have stepped
+         drunks : list
+             The list containing 25 drunks
+         home_num : int
+             The home number assigned to the drunks in the pub
+         x:
+             Set the initial x coordinate in the pub
+         y:
+             Set the initial y coordinate in the pub
+        '''
+        
         self.densitymap = densitymap # feeds in the densitymap
-        self.drunks = drunks # feeds in awareness of drunks
+        self.drunks = drunks # feeds in the drunks list
         self.home_num = home_num # feeds in the house numbers
         self.x = startx # sets starting x at pub
         self.y = starty # sets starting y at pub
         
         
-     # move function will make the drunks take 5 steps each iteration as they search for their home
     def move(self):
+        '''
+        The move method will make drunks take a step of 5 with each iteration
+        (until the model discovers that the drunk has found their home). The 
+        direction of movement of the drunks is randomly generated.
+        % 300 is the Torus boundary solution so drunks don't fall off the graph.
+        '''
         
-        if random.random() < 0.5: # direction of movement of the drunks is randomly generated
-            self.x = (self.x + 5) % 300 # % 300 is the Torus boundary solution so drunks don't fall off the graph
+        if random.random() < 0.5: 
+            self.x = (self.x + 5) % 300
         else:
             self.x = (self.x - 5) % 300
                 
@@ -36,8 +74,12 @@ class Drunk:
         else:
             self.y = (self.y - 5) % 300
             
-     # density function will add 1 point of density to densitymap wherever the drunks step          
+          
     def density(self): 
+        '''
+        The density function will add 1 point of density to densitymap wherever 
+        the drunks step
+        '''
         self.densitymap[self.x][self.y] += 1
         
         
